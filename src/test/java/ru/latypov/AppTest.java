@@ -10,7 +10,7 @@ public class AppTest {
 
     @Before
     public void setUp() throws Exception {
-        RouterFunction<?> routes = App.routes();
+        RouterFunction<?> routes = Application.routes();
         this.testClient = WebTestClient.bindToRouterFunction(routes).build();
     }
 
