@@ -1,63 +1,61 @@
-CREATE TABLE IF NOT EXISTS Organization (
-      id   INTEGER  PRIMARY KEY AUTO_INCREMENT,
-      name VARCHAR(50) NOT NULL,
-      fullname VARCHAR(50) UNIQUE NOT NULL,
-      inn INTEGER UNIQUE NOT NULL,
-      kpp INTEGER NOT NULL,
-      address VARCHAR(50) NOT NULL,
-      phone VARCHAR(50) ,
-      isActive  BOOLEAN
-  );
-  CREATE TABLE IF NOT EXISTS Office (
-      id   INTEGER  PRIMARY KEY AUTO_INCREMENT,
-      orgid  INTEGER NOT NULL,
-      name VARCHAR(50) NOT NULL,
-      address VARCHAR(50) NOT NULL,
-      phone VARCHAR(50) ,
-      isActive  BOOLEAN
-  );
+CREATE TABLE IF NOT EXISTS Organization
+(
+  id        INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name      VARCHAR(50)        NOT NULL,
+  full_name VARCHAR(50) UNIQUE NOT NULL,
+  inn       VARCHAR(50) UNIQUE NOT NULL,
+  kpp       VARCHAR(50)        NOT NULL,
+  address   VARCHAR(50)        NOT NULL,
+  phone     VARCHAR(50),
+  is_active BOOLEAN
+);
+CREATE TABLE IF NOT EXISTS Office
+(
+  id        INTEGER PRIMARY KEY AUTO_INCREMENT,
+  org_id    INTEGER     NOT NULL,
+  name      VARCHAR(50) NOT NULL,
+  address   VARCHAR(50) NOT NULL,
+  phone     VARCHAR(50),
+  is_active BOOLEAN
+);
 
-  CREATE TABLE IF NOT EXISTS User (
-      id   INTEGER  PRIMARY KEY AUTO_INCREMENT,
-      officeid  INTEGER NOT NULL,
-      firstname VARCHAR(50) NOT NULL,
-      secondname VARCHAR(50) ,
-      middlename VARCHAR(50) ,
-      position VARCHAR(50) NOT NULL,
-      phone VARCHAR(50) ,
-      docName VARCHAR(50) ,
-      docNumber INTEGER ,
-      docDate TIMESTAMP,
-      citizenshipName VARCHAR(50) ,
-      citizenshipCode INTEGER ,
-      isIdentified BOOLEAN ,
-      isActive  BOOLEAN
-  );
-  CREATE TABLE IF NOT EXISTS dosc (
-      id      INTEGER  PRIMARY KEY AUTO_INCREMENT,
-      name    VARCHAR(50) ,
-      code    INTEGER
- );
+CREATE TABLE IF NOT EXISTS User
+(
+  id               INTEGER PRIMARY KEY AUTO_INCREMENT,
+  office_id        INTEGER     NOT NULL,
+  first_name       VARCHAR(50) NOT NULL,
+  second_name      VARCHAR(50),
+  middle_name      VARCHAR(50),
+  position         VARCHAR(50) NOT NULL,
+  phone            VARCHAR(50),
+  doc_name         VARCHAR(50),
+  doc_number       INTEGER,
+  doc_date         TIMESTAMP,
+  doc_code         INTEGER,
+  citizenship_name VARCHAR(50),
+  citizenship_code INTEGER,
+  is_identified    BOOLEAN,
+  is_active        BOOLEAN
+);
 
-  CREATE TABLE IF NOT EXISTS countries (
-      id      INTEGER  PRIMARY KEY AUTO_INCREMENT,
-      name    VARCHAR(50) ,
-      code    INTEGER
- );
+CREATE TABLE IF NOT EXISTS Document
+(
+  id   INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50),
+  code VARCHAR(50)
+);
 
-   CREATE TABLE IF NOT EXISTS User_Organization_Office (
-      user_id   INTEGER  NOT NULL,
-      org_id    INTEGER  NOT NULL,
-      office_id INTEGER  NOT NULL,
+CREATE TABLE IF NOT EXISTS Citizenship
+(
+  id   INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50),
+  code INTEGER
+);
 
-      PRIMARY KEY (person_id, org_id, office_id)
-  );
 
-  CREATE INDEX IX_User_Organization_Office_Id ON User_Organization_Office (office_id);
-  ALTER TABLE User_Organization_Office ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
-  CREATE INDEX IX_Office_User_Organization_Id ON User_Organization_Office (user_id);
-  ALTER TABLE User_Organization_Office ADD FOREIGN KEY (user_id) REFERENCES User(id);
+ALTER TABLE User
+  ADD FOREIGN KEY (doc_code) REFERENCES Document (id);
 
-  CREATE INDEX IX_Organization_User_Office_Id ON User_Organization_Office (org_id);
-  ALTER TABLE User_Organization_Office ADD FOREIGN KEY (org_id) REFERENCES Organization(id);
+ALTER TABLE User
+  ADD FOREIGN KEY (citizenship_code) REFERENCES Citizenship (id);
