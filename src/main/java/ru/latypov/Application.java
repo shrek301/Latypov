@@ -1,6 +1,5 @@
 package ru.latypov;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +18,9 @@ import java.util.Locale;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
+
+import java.util.Locale;
+
 @EnableSwagger2
 @ImportResource("spring_mvc_config.xml")
 @SpringBootApplication
@@ -26,14 +28,6 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    public TaskExecutor controllerPool() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setMaxPoolSize(Runtime.getRuntime().availableProcessors() + 1);
-        executor.setQueueCapacity(25);
-        return executor;
     }
 
     @Bean
