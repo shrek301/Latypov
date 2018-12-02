@@ -1,6 +1,7 @@
 package ru.latypov;
 
-import org.junit.Before;
+
+import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.server.RouterFunction;
