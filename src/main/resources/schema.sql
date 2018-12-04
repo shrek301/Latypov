@@ -52,10 +52,31 @@ CREATE TABLE IF NOT EXISTS Citizenship
   code INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS User_Document (
+user_id   INTEGER  NOT NULL  ,
+document_id    INTEGER  NOT NULL  ,
 
+PRIMARY KEY (user_id, document_id)
+);
+CREATE TABLE IF NOT EXISTS User_Citizenship (
+user_id   INTEGER  NOT NULL ,
+citizenship_id    INTEGER  NOT NULL ,
 
-ALTER TABLE User
-  ADD FOREIGN KEY (doc_code) REFERENCES Document (id);
+PRIMARY KEY (person_id, house_id)
+);
 
-ALTER TABLE User
-  ADD FOREIGN KEY (citizenship_code) REFERENCES Citizenship (id);
+CREATE INDEX IX_User_Document_Id ON User_Document (document_id);
+ALTER TABLE User_Document
+  ADD FOREIGN KEY (document_id) REFERENCES Document (id);
+
+CREATE INDEX IX_Document_User_Id ON User_Document (user_id);
+ALTER TABLE User_Document
+  ADD FOREIGN KEY (user_id) REFERENCES User (id);
+
+CREATE INDEX IX_User_Citizenship_Id ON User_Citizenship (citizenship_id);
+ALTER TABLE User_Document
+  ADD FOREIGN KEY (citizenship_id) REFERENCES Citizenship (id);
+
+CREATE INDEX IX_User_Citizenship_Id ON User_Citizenship (user_id);
+ALTER TABLE User_Citizenship
+  ADD FOREIGN KEY (user_id) REFERENCES User (id);
