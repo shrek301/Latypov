@@ -1,13 +1,11 @@
 package ru.latypov;
 
-
 import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.server.RouterFunction;
 
 public class AppTest {
-    private WebTestClient testClient;
+
 
     @Before
     public void setUp() throws Exception {
