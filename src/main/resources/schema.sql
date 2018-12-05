@@ -18,7 +18,6 @@ CREATE TABLE IF NOT EXISTS Office
   id        INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
   user_id INTEGER , FOREIGN KEY (user_id) REFERENCES User(id),
   organization_id INTEGER , FOREIGN KEY (organization_id) REFERENCES Organization(id),
-  org_id    INTEGER     NOT NULL COMMENT 'Уникальный идентификатор Организация',
   name      VARCHAR(50) NOT NULL COMMENT 'Наименование',
   address   VARCHAR(50) NOT NULL COMMENT 'Адрес',
   phone     VARCHAR(50) COMMENT 'Телефон',
