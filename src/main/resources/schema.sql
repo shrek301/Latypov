@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS Organization
 (
   id        INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+  user_id INTEGER , FOREIGN KEY (user_id) REFERENCES User(id),
+  office_id INTEGER , FOREIGN KEY (office_id) REFERENCES Office(id),
   name      VARCHAR(50)                      NOT NULL COMMENT 'Имя',
   full_name VARCHAR(50) COMMENT 'Имя' UNIQUE NOT NULL,
   inn       VARCHAR(10) COMMENT 'ИНН' UNIQUE NOT NULL,
@@ -14,6 +16,8 @@ COMMENT ON TABLE Organization IS 'Организация';
 CREATE TABLE IF NOT EXISTS Office
 (
   id        INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+  user_id INTEGER , FOREIGN KEY (user_id) REFERENCES User(id),
+  organization_id INTEGER , FOREIGN KEY (organization_id) REFERENCES Organization(id),
   org_id    INTEGER     NOT NULL COMMENT 'Уникальный идентификатор Организация',
   name      VARCHAR(50) NOT NULL COMMENT 'Наименование',
   address   VARCHAR(50) NOT NULL COMMENT 'Адрес',
@@ -28,6 +32,7 @@ CREATE TABLE IF NOT EXISTS User
   doc_type_id   INTEGER, FOREIGN KEY (doc_type_id) REFERENCES Document_Type(id),
   citizenship_id INTEGER , FOREIGN KEY (citizenship_id) REFERENCES Citizenship(id),
   office_id INTEGER , FOREIGN KEY (office_id) REFERENCES Office(id),
+  organization_id INTEGER , FOREIGN KEY (organization_id) REFERENCES Organization(id),
   first_name    VARCHAR(50) NOT NULL COMMENT 'Имя',
   second_name   VARCHAR(50) COMMENT 'Фамилия',
   middle_name   VARCHAR(50) COMMENT 'Отчество',
