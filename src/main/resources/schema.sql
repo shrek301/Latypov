@@ -25,6 +25,9 @@ COMMENT ON TABLE Office IS 'Офис';
 CREATE TABLE IF NOT EXISTS User
 (
   id            INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+  doc_type_id   INTEGER, FOREIGN KEY (doc_type_id) REFERENCES Document_Type(id),
+  citizenship_id INTEGER , FOREIGN KEY (citizenship_id) REFERENCES Citizenship(id),
+  office_id INTEGER , FOREIGN KEY (office_id) REFERENCES Office(id),
   first_name    VARCHAR(50) NOT NULL COMMENT 'Имя',
   second_name   VARCHAR(50) COMMENT 'Фамилия',
   middle_name   VARCHAR(50) COMMENT 'Отчество',
@@ -37,8 +40,8 @@ COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS Document_Type
 (
-  id       INTEGER COMMENT 'Возраст' PRIMARY KEY AUTO_INCREMENT,
-  doc_code VARCHAR(2)  NOT NULL COMMENT 'типа документа',
+  id       INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+  doc_code VARCHAR(2)  NOT NULL COMMENT 'код документа',
   doc_name VARCHAR(50) NOT NULL COMMENT 'имя документа',
 );
 COMMENT ON TABLE Document_Type IS 'Тип документа';
@@ -46,7 +49,8 @@ COMMENT ON TABLE Document_Type IS 'Тип документа';
 
 CREATE TABLE IF NOT EXISTS Document
 (
-  id         INTEGER COMMENT 'Возраст' PRIMARY KEY AUTO_INCREMENT,
+  id         INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+   doc_type_id   INTEGER, FOREIGN KEY (doc_type_id) REFERENCES Document_Type(id),
   doc_number INTEGER COMMENT 'номер документа',
   doc_date   TIMESTAMP COMMENT 'дата документа',
 
@@ -55,10 +59,11 @@ COMMENT ON TABLE Document IS 'Документ';
 
 CREATE TABLE IF NOT EXISTS Citizenship
 (
-  id               INTEGER COMMENT 'Возраст' PRIMARY KEY AUTO_INCREMENT,
+  id               INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
   citizenship_name VARCHAR(50) COMMENT 'гражданство',
   citizenship_code VARCHAR(3) COMMENT 'код гражданства'
 );
 COMMENT ON TABLE Citizenship IS 'Гражданство';
+
 
 
