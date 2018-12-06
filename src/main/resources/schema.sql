@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS User
   document_id  INTEGER COMMENT 'Связь с таблицей  Документ',
   FOREIGN KEY (document_id) REFERENCES Document (id),
   сountry_id   INTEGER COMMENT 'Связь с таблицей Гражданство',
-  FOREIGN KEY (country_id) REFERENCES Country (id),
+  FOREIGN KEY (сountry_id) REFERENCES Country (id),
   office_id    INTEGER COMMENT 'Связь с таблицей Офис',
   FOREIGN KEY   (office_id) REFERENCES Office (id),
   first_name    VARCHAR(50) NOT NULL COMMENT 'Имя',
@@ -76,6 +76,5 @@ COMMENT ON TABLE User IS 'Пользователь';
 CREATE INDEX I_Office ON Office (organization_id);
 CREATE INDEX II_User ON User (сountry_id);
 CREATE INDEX III_User ON User (office_id);
-CREATE INDEX IV_User ON User (organization_id);
 CREATE INDEX V_Document ON Document (type_id);
 CREATE INDEX VI_User ON User (document_id);
