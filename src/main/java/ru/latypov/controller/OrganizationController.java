@@ -1,6 +1,5 @@
 package ru.latypov.controller;
 
-
 import com.example.demo.model.OrganizationService;
 import io.swagger.models.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Контролер для  api/organization.
+ */
+
+
 @RestController
 @RequestMapping("api/organization")
 
+
 public class OrganizationController {
-
-    private OrganizationService organizationService;
-
     @Autowired
-    public void setOrganizationService(OrganizationService organizationService) {
-        this.organizationService = organizationService;
-    }
+    private OrganizationService organizationService;
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Iterable list(Model model) {
@@ -26,11 +26,19 @@ public class OrganizationController {
         return organizationList;
     }
 
+    /**
+     * Слушаем /{id}.
+     */
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Organization showOrganization(@PathVariable Integer id, Model model) {
         Organization organization = OrganizationService.getOrganizationById(id);
         return organization;
     }
+
+    /**
+     * Слушаем /update.
+     */
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity updateOrganization(@RequestBody Organization organization) {
@@ -47,9 +55,15 @@ public class OrganizationController {
 
     }
 
+    /**
+     * Слушаем /save.
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity saveOrganization(@RequestBody Organization organization) {
         organizationService.saveOrganization(organization);
         return new ResponseEntity("success", HttpStatus.OK);
     }
 }
+
+
+
