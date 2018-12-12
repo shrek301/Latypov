@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class OfficeController {
     @Autowired
     private OfficeService officeService;
+    /**
+     * Слушаем /list/{orgid}.
+     */
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Iterable list(Model model) {
-        Iterable officeList = officeService.listAllOffise();
+    @RequestMapping(value = "/list/{orgid}", method = RequestMethod.POST)
+    public Iterable list(@PathVariable Integer orgid, Model model) {
+        Iterable officeList = officeService.getlistOrgOffise(orgid);
         return officeList;
     }
 
@@ -44,9 +47,6 @@ public class OfficeController {
     public ResponseEntity updateOrganization(@RequestBody Office office) {
         storedOffice.setId(office.getofficeById());
         storedOffice = setName(office.getName());
-        storedoffice = setFullName(office.getFullName());
-        storedoffice = setInn(office.getInn());
-        storedOffice = setKpp(office.getKpp());
         storedOffice = setAddress(office.getAddress());
         storedOffice = setPhone(office.getPhone());
         storedOffice = setIsActiv(office.getIsActive());
@@ -64,4 +64,6 @@ public class OfficeController {
         return new ResponseEntity("success", HttpStatus.OK);
     }
 }
+
+
 
