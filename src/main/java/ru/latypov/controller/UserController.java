@@ -1,10 +1,10 @@
 package ru.latypov.controller;
 
-        import com.example.demo.model.EmployeeService;
-        import io.swagger.models.Model;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.*;
-        import org.springframework.web.bind.annotation.*;
+import com.example.demo.model.EmployeeService;
+import io.swagger.models.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Контролер для  api/organization.
@@ -12,12 +12,16 @@ package ru.latypov.controller;
 
 
 @RestController
-@RequestMapping("api/organization")
+@RequestMapping("api/user")
 
 
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+
+    /**
+     * Слушаем /list.
+     */
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Iterable list(Model model) {
@@ -29,7 +33,7 @@ public class EmployeeController {
      * Слушаем /{id}.
      */
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(svalue = "/{id}", method = RequestMethod.GET)
     public Employee showOrganization(@PathVariable Integer id) {
         Employee employee = EmployeeService.getEmployeeById(id);
         return Employee;
@@ -63,5 +67,6 @@ public class EmployeeController {
         return new ResponseEntity("success", HttpStatus.OK);
     }
 }
+
 
 
