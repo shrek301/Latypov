@@ -3,9 +3,10 @@ package ru.latypov.controller;
 import com.example.demo.model.OrganizationService;
 import io.swagger.models.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+
+import javax.jws.WebParam;
 
 /**
  * Контролер для  api/organization.
@@ -64,6 +65,7 @@ public class OrganizationController {
         return new ResponseEntity("success", HttpStatus.OK);
     }
 }
+
 
 
 
