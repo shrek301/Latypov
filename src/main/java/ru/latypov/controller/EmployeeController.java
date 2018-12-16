@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.latypov.model.Employee;
 import ru.latypov.service.EmployeeService;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -40,27 +41,25 @@ public class EmployeeController {
      * Слушаем /update.
      */
     @PostMapping(value = "api/user/update")
-    public ResponseEntity updatEemployee(@RequestBody Employee employee) {
-        storedEmployee.setId(employee.getEmployeeById());
-        storedEmployee = setName(employee.getName());
-        storedEmployee = setFullName(employee.getFullName());
-        storedEmployee = setInn(employee.getInn());
-        storedEmployee = setKpp(employee.getKpp());
-        storedEmployee = setAddress(employee.getAddress());
-        storedEmployee = setPhone(employee.getPhone());
-        storedEmployee = setIsActiv(employee.getIsActive());
-        EmployeeService.saveEmployee(storedEmployee);
-        return new ResponseEntity("success", HttpStatus.OK);
+    public updateEemployee(@RequestBody Employee employee)   throws URISyntaxException {
+        Employee emp = employeeService.getEmployee(employee);
+        if (emp != null) {
+            employeeService.updateEmployee(employee);
+            return "success";
+        }
+
     }
+
+
 
     /**
      * Слушаем /save.
      */
 
     @PostMapping(value = "api/user/save")
-       public saveEmployee (Employee employee){
+    public saveEmployee(Employee employee) {
         employeeService.savesEmployee(employee);
-        return  ;
+        return;
     }
 }
 
