@@ -1,68 +1,64 @@
 package ru.latypov.controller;
 
 
-import com.example.demo.model.OfficeService;
-import io.swagger.models.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import ru.latypov.model.Office;
+import ru.latypov.service.OfficeService;
+
+import java.util.List;
+
 
 /**
  * Контролер для  api/office.
  */
 
-
 @RestController
-@RequestMapping("api/office")
-
-
 public class OfficeController {
     @Autowired
     private OfficeService officeService;
-    /**
-     * Слушаем /list/{orgid}.
-     */
 
-    @RequestMapping(value = "/list/{orgid}", method = RequestMethod.POST)
-    public Iterable list(@PathVariable Integer orgid, Model model) {
-        Iterable officeList = officeService.getlistOrgOffise(orgid);
-        return officeList;
+    /**
+     * Слушаем /list.
+     */
+    @PostMapping(value = "api/office/list")
+    public List<Office> getOffice() {
+
+        return officeService.retrieveOffice();
     }
 
     /**
      * Слушаем /{id}.
      */
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Office showOrganization(@PathVariable Integer id, Model model) {
-        Office office = OfficeService.getOfficeById(id);
-        return office;
+    @GetMapping(value = "api/office/{id}")
+    public Office getOffice(@PathVariable(name = "id") Integer id) {
+        return officeService.getOffice(id);
     }
 
     /**
      * Слушаем /update.
      */
+    @PostMapping(value = "api/office/update")
+    public ResponseEntity updateOffice(@RequestBody Office office) {
+        Office emp = officeService.getOffice(office);
+        if (emp != null) {
+            officeService.updateOffice(office);
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public ResponseEntity updateOrganization(@RequestBody Office office) {
-        storedOffice.setId(office.getofficeById());
-        storedOffice = setName(office.getName());
-        storedOffice = setAddress(office.getAddress());
-        storedOffice = setPhone(office.getPhone());
-        storedOffice = setIsActiv(office.getIsActive());
-        OfficeService.saveOffice(storedOffice);
+        }
+
         return new ResponseEntity("success", HttpStatus.OK);
-
     }
 
     /**
      * Слушаем /save.
      */
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResponseEntity saveOffice(@RequestBody Office office) {
-        OfficeService.saveOffice(office);
-        return new ResponseEntity("success", HttpStatus.OK);
+    @PostMapping(value = "api/office/save")
+    public void saveOffice(Office office) {
+        officeService.savesOffice(office);
+
     }
+
 }
 
 
