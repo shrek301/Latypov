@@ -40,15 +40,16 @@ public class EmployeeController {
      * Слушаем /update.
      */
     @PostMapping(value = "api/employee/update")
-    public ResponseEntity updateEmployee(@RequestBody Employee employee) {
+    public ResponseEntity updateEmployee (@RequestBody Employee employee) {
         Employee emp = employeeService.getEmployee(employee);
         if (emp != null) {
-            employeeService.getEmployee(employee);
+            employeeService.updateEmployee(employee);
 
         }
 
         return new ResponseEntity("success", HttpStatus.OK);
     }
+
 
     /**
      * Слушаем /save.

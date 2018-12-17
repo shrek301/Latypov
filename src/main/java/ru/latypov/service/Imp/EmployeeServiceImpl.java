@@ -1,6 +1,7 @@
 package ru.latypov.service.Imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.latypov.repository.EmployeeRepository;
 import ru.latypov.model.Employee;
@@ -21,5 +22,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<Employee> optEmp = employeeRepository.findById(id);
         return optEmp.get();
     }
-    public
+    public ResponseEntity updateEmployee(Employee employee){
+        return employeeRepository.save(employee);
+    }
+    public void saveEmployee (Employee employee){
+        employeeRepository.save(employee);
+    }
 }
