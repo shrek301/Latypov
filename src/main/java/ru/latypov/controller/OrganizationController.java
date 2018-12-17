@@ -1,12 +1,14 @@
 package ru.latypov.controller;
 
-import com.example.demo.model.OrganizationService;
-import io.swagger.models.Model;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import ru.latypov.model.Organization;
+import ru.latypov.service.OrganizationService;
 
-import javax.jws.WebParam;
+import java.util.List;
+
 
 /**
  * Контролер для  api/organization.
@@ -14,58 +16,48 @@ import javax.jws.WebParam;
 
 
 @RestController
-@RequestMapping("api/organization")
-
-
 public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Iterable list(Model model) {
-        Iterable organizationList = organizationService.listAllOrganization();
-        return organizationList;
+    /**
+     * Слушаем /list.
+     */
+    @PostMapping(value = "api/organization/list")
+    public List<Organization> getOrganization() {
+        List<Organization> organization = organizationService.retrieveOrganization();
+        return organization;
     }
 
     /**
      * Слушаем /{id}.
      */
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Organization showOrganization(@PathVariable Integer id, Model model) {
-        Organization organization = OrganizationService.getOrganizationById(id);
-        return organization;
+    @GetMapping(value = "api/organization/{id}")
+    public Organization getOrganization(@PathVariable(name = "id") Integer id) {
+        return organizationService.getOrganization(id);
     }
 
     /**
      * Слушаем /update.
      */
-
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @PostMapping(value = "api/organization/update")
     public ResponseEntity updateOrganization(@RequestBody Organization organization) {
-        storedOrganization.setId(organization.getOrganizationById());
-        storedOrganization = setName(organization.getName());
-        storedOrganization = setFullName(organization.getFullName());
-        storedOrganization = setInn(organization.getInn());
-        storedOrganization = setKpp(organization.getKpp());
-        storedOrganization = setAddress(organization.getAddress());
-        storedOrganization = setPhone(organization.getPhone());
-        storedOrganization = setIsActiv(organization.getIsActive());
-        OrganizationService.saveOrganization(storedOrganization);
-        return new ResponseEntity("success", HttpStatus.OK);
+        Organization emp = organizationService.getOrganization(organization);
+        if (emp != null) {
+            organizationService.updateOrganization(organization);
 
+        }
+
+        return new ResponseEntity("success", HttpStatus.OK);
     }
 
     /**
      * Слушаем /save.
      */
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResponseEntity saveOrganization(@RequestBody Organization organization) {
-        organizationService.saveOrganization(organization);
-        return new ResponseEntity("success", HttpStatus.OK);
+    @PostMapping(value = "api/organization/save")
+    public void saveOrganization(Organization organization) {
+        organizationService.savesOrganization(organization);
+
     }
+
 }
-
-
-
-
