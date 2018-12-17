@@ -2,7 +2,7 @@ package ru.latypov.service.Imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.latypov.Repository.EmployeeRepository;
+import ru.latypov.repository.EmployeeRepository;
 import ru.latypov.model.Employee;
 import ru.latypov.service.EmployeeService;
 

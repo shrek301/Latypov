@@ -1,4 +1,4 @@
-package ru.latypov.Repository;
+package ru.latypov.repository;
 
 public class OfficeRepository {
 }
