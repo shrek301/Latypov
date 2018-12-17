@@ -22,6 +22,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<Employee> optEmp = employeeRepository.findById(id);
         return optEmp.get();
     }
+    public Employee  getEmployee (Employee employee){
+        Optional<Employee> optEmp1=employeeRepository.findByemployee(employee);
+        return optEmp1.get();
+    }
     public ResponseEntity updateEmployee(Employee employee){
         return employeeRepository.save(employee);
     }
