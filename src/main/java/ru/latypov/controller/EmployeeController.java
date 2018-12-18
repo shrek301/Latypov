@@ -25,9 +25,9 @@ public class EmployeeController {
     @ResponseBody
     @PostMapping(value = "api/employee/list")
     public List<Employee>  getEmployee() {
-        List<Employee> employees = employeeService.retrieveEmployees();
 
-        return   employees;
+
+        return   employeeService.retrieveEmployees();
     }
 
     /**
