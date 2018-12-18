@@ -17,191 +17,98 @@
     </properties>
 
     <parent>
+
         <groupId>org.springframework.boot</groupId>
+
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.6.RELEASE</version>
+
+        <version>2.0.3.RELEASE</version>
+
+        <relativePath/> <!-- lookup parent from repository -->
+
     </parent>
+
 
     <dependencies>
 
-        <!-- Встроенный http сервер -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jsr311-api</artifactId>
-                    <groupId>javax.ws.rs</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
-        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml</groupId>
-            <artifactId>classmate</artifactId>
-            <version>1.4.0</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>ma.glasnost.orika</groupId>
-            <artifactId>orika-core</artifactId>
-            <version>${orika.mapper.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <!-- модульные и интеграционные тесты -->
-        <dependency>
             <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+
+        </dependency>
+
+
+        <dependency>
+
+            <groupId>com.h2database</groupId>
+
+            <artifactId>h2</artifactId>
+
+            <scope>runtime</scope>
+
+        </dependency>
+
+
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+
             <artifactId>spring-boot-starter-test</artifactId>
+
             <scope>test</scope>
-        </dependency>
-                <dependency>
-            <groupId>org.zenframework.z8.dependencies.servlet</groupId>
-            <artifactId>servlet-api-2.5</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>javax.servlet</artifactId>
-            <version>1.0.0</version>
+
         </dependency>
 
         <dependency>
+
             <groupId>io.springfox</groupId>
+
             <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
+
+            <version>2.7.0</version>
+
         </dependency>
 
         <dependency>
+
             <groupId>io.springfox</groupId>
+
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
+
+            <version>2.7.0</version>
+
         </dependency>
+
+
     </dependencies>
+
+
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${encoding}</encoding>
-                </configuration>
-            </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
+
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>ru.latypov.Application</mainClass>
-                    <jvmArguments>
-                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
-                    </jvmArguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>${encoding}</encoding>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/classes/public</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/webapp</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.hibernate.orm.tooling</groupId>
-                <artifactId>hibernate-enhance-maven-plugin</artifactId>
-                <!-- Свойство определено в spring-boot-starter-parent -->
-                <version>${hibernate.version}</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <failOnError>true</failOnError>
-                            <enableLazyInitialization>true</enableLazyInitialization>
-                            <enableDirtyTracking>true</enableDirtyTracking>
-                            <enableAssociationManagement>true</enableAssociationManagement>
-                        </configuration>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>
+
+
     </build>
+
 </project>
