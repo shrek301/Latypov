@@ -2,32 +2,33 @@ package ru.latypov.service.Imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.latypov.model.Office;
-import ru.latypov.repository.OfficeRepository;
-import ru.latypov.service.OfficeService;
+import ru.latypov.model.Organization;
+import ru.latypov.repository.OrganizationRepository;
+import ru.latypov.service.OrganizationService;
 
 import java.util.List;
 import java.util.Optional;
-@Service
-public class OfficeServiceImpl implements OfficeService {
+
+@Service("OrganizationService")
+public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
-    private OfficeRepository officeRepository;
-    public List<Office> retrieveOffice(){
-        List <Office> office=officeRepository.findAll();
-        return office;
+    private OrganizationRepository organizationRepository;
+    public List<Organization> retrieveOrganization(){
+        List<Organization> organization=organizationRepository.findAll();
+        return organization;
     }
-    public Office getOffice (Integer id) {
-        Optional<Office> optEmp = officeRepository.findById(id);
+    public Organization getOrganization (Integer id) {
+        Optional<Organization> optEmp = organizationRepository.findById(id);
         return optEmp.get();
     }
-    public Office  getOffice (Office office){
-        Optional<Office> optEmp1=officeRepository.findById(office.getId());
+    public Organization  getOrganization (Organization organization){
+        Optional<Organization> optEmp1=organizationRepository.findById(organization.getId());
         return optEmp1.get();
     }
-    public Office updateOffice(Office office){
-        return officeRepository.save(office);
+    public Organization updateOrganization(Organization organization){
+        return organizationRepository.save(organization);
     }
-    public void savesOffice (Office office){
-        officeRepository.save(office);
+    public void savesOrganization (Organization organization){
+        organizationRepository.save(organization);
     }
 }
