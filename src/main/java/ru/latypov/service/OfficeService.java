@@ -1,7 +1,6 @@
 package ru.latypov.service;
 
 
-import org.springframework.http.ResponseEntity;
 import ru.latypov.model.Office;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface OfficeService {
 
     public void savesOffice(Office office);
 
-    public ResponseEntity updateOffice(Office office);
+    public Office updateOffice(Office office);
 
     public Office getOffice(Office office);
 }

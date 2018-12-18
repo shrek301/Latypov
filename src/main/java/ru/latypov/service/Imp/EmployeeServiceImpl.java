@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Service
+@Service("EmployeeService")
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;

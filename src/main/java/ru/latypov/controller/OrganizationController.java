@@ -25,8 +25,8 @@ public class OrganizationController {
      */
     @PostMapping(value = "api/organization/list")
     public List<Organization> getOrganization() {
-        List<Organization> organization = organizationService.retrieveOrganization();
-        return organization;
+        List<Organization> organizations = organizationService.retrieveOrganization();
+        return organizations;
     }
 
     /**

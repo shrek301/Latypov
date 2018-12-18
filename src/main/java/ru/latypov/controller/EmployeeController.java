@@ -23,9 +23,10 @@ public class EmployeeController {
      * Слушаем /list.
      */
     @PostMapping(value = "api/employee/list")
-    public List<Employee> getEmployee() {
+    public List<Employee>  getEmployee() {
+        List<Employee> employees = employeeService.retrieveEmployees();
 
-        return employeeService.retrieveEmployees();
+        return   employees;
     }
 
     /**

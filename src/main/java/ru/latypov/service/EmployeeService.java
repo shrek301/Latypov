@@ -1,7 +1,6 @@
 package ru.latypov.service;
 
 
-import org.springframework.http.ResponseEntity;
 import ru.latypov.model.Employee;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface EmployeeService {
 
     public void saveEmployee(Employee employee);
 
-    public ResponseEntity updateEmployee(Employee employee);
+    public Employee updateEmployee(Employee employee);
 
     public Employee getEmployee(Employee employee);
 }

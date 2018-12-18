@@ -1,6 +1,6 @@
 package ru.latypov.service;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import ru.latypov.model.Organization;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface OrganizationService {
 
     public void savesOrganization(Organization organization);
 
-    public ResponseEntity updateOrganization(Organization organization);
+    public Organization updateOrganization(Organization organization);
 
     public Organization getOrganization(Organization organization);
 }

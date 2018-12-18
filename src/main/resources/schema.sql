@@ -76,5 +76,4 @@ COMMENT ON TABLE User IS 'Пользователь';
 CREATE INDEX I_Office ON Office (organization_id);
 CREATE INDEX II_User ON User (сountry_id);
 CREATE INDEX III_User ON User (office_id);
-CREATE INDEX V_Document ON Document (type_id);
-CREATE INDEX VI_User ON User (document_id);
+
