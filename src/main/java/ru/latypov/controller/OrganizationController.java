@@ -16,6 +16,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("api/organization")
 public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
@@ -23,7 +24,7 @@ public class OrganizationController {
     /**
      * Слушаем /list.
      */
-    @PostMapping(value = "api/organization/list")
+    @PostMapping(value = "/list")
     public List<Organization> getOrganization() {
         List<Organization> organizations = organizationService.retrieveOrganization();
         return organizations;
@@ -32,7 +33,7 @@ public class OrganizationController {
     /**
      * Слушаем /{id}.
      */
-    @GetMapping(value = "api/organization/{id}")
+    @GetMapping(value = "/{id}")
     public Organization getOrganization(@PathVariable(name = "id") Integer id) {
         return organizationService.getOrganization(id);
     }
@@ -40,7 +41,7 @@ public class OrganizationController {
     /**
      * Слушаем /update.
      */
-    @PostMapping(value = "api/organization/update")
+    @PostMapping(value = "/update")
     public ResponseEntity updateOrganization(@RequestBody Organization organization) {
         Organization emp = organizationService.getOrganization(organization);
         if (emp != null) {
@@ -54,7 +55,7 @@ public class OrganizationController {
     /**
      * Слушаем /save.
      */
-    @PostMapping(value = "api/organization/save")
+    @PostMapping(value = "/save")
     public void saveOrganization(Organization organization) {
         organizationService.savesOrganization(organization);
 

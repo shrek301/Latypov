@@ -4,6 +4,7 @@ package ru.latypov.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import ru.latypov.exception.EmployeeNotFound;
 import ru.latypov.model.Employee;
 import ru.latypov.service.EmployeeService;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("api/user")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -22,27 +24,29 @@ public class EmployeeController {
     /**
      * Слушаем /list.
      */
+
+    @PostMapping(value = "/list")
     @ResponseBody
-    @PostMapping(value = "api/employee/list")
-    public List<Employee>  getEmployee() {
+    public List<Employee> getEmployee() {
 
 
-        return   employeeService.retrieveEmployees();
+        return employeeService.retrieveEmployees();
     }
 
     /**
      * Слушаем /{id}.
      */
-    @GetMapping(value = "api/employee/{id}")
-    public Employee getEmpoloyee (@PathVariable(name = "id") Integer id) {
+    @GetMapping(value = "/{id}")
+    public Employee getEmpoloyee(@PathVariable(name = "id") Integer id) {
+        if (!getEmployee().isPresent()) throw new EmployeeNotFound("id" + id);
         return employeeService.getEmployee(id);
     }
 
     /**
      * Слушаем /update.
      */
-    @PostMapping(value = "api/employee/update")
-    public ResponseEntity updateEmployee (@RequestBody Employee employee) {
+    @PostMapping(value = "/update")
+    public ResponseEntity updateEmployee(@RequestBody Employee employee) {
         Employee emp = employeeService.getEmployee(employee);
         if (emp != null) {
             employeeService.updateEmployee(employee);
@@ -56,7 +60,7 @@ public class EmployeeController {
     /**
      * Слушаем /save.
      */
-    @PostMapping(value = "api/employee/save")
+    @PostMapping(value = "/save")
     public void saveEmployee(Employee employee) {
         employeeService.saveEmployee(employee);
 

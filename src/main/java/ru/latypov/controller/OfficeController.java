@@ -15,6 +15,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("api/office")
 public class OfficeController {
     @Autowired
     private OfficeService officeService;
@@ -22,7 +23,7 @@ public class OfficeController {
     /**
      * Слушаем /list.
      */
-    @PostMapping(value = "api/office/list")
+    @PostMapping(value = "/list")
     public List<Office> getOffice() {
 
         return officeService.retrieveOffice();
@@ -31,7 +32,7 @@ public class OfficeController {
     /**
      * Слушаем /{id}.
      */
-    @GetMapping(value = "api/office/{id}")
+    @GetMapping(value = "/{id}")
     public Office getOffice(@PathVariable(name = "id") Integer id) {
         return officeService.getOffice(id);
     }
@@ -39,7 +40,7 @@ public class OfficeController {
     /**
      * Слушаем /update.
      */
-    @PostMapping(value = "api/office/update")
+    @PostMapping(value = "/update")
     public ResponseEntity updateOffice(@RequestBody Office office) {
         Office emp = officeService.getOffice(office);
         if (emp != null) {
