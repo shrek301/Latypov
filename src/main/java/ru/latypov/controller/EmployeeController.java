@@ -38,7 +38,7 @@ public class EmployeeController {
      */
     @GetMapping(value = "/{id}")
     public Employee getEmpoloyee(@PathVariable(name = "id") Integer id) {
-        if (!getEmployee().isPresent()) throw new EmployeeNotFound("id" + id);
+  
         return employeeService.getEmployee(id);
     }
 
