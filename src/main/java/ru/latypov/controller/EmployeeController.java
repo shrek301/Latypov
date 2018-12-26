@@ -37,7 +37,8 @@ public class EmployeeController {
      * Слушаем /{id}.
      */
     @GetMapping(value = "/{id}")
-    public Employee getEmpoloyee(@PathVariable(name = "id") Integer id) {
+    @ResponseBody
+    public Employee getEmpoloyee(@PathVariable(name = "id") Integer id) throws EmployeeNotFound {
   
         return employeeService.getEmployee(id);
     }

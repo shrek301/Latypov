@@ -1,6 +1,7 @@
 package ru.latypov.service;
 
 
+import ru.latypov.exception.EmployeeNotFound;
 import ru.latypov.model.Employee;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public interface EmployeeService {
     public List<Employee> retrieveEmployees();
 
-    public Employee getEmployee(Integer id);
+    public Employee getEmployee(Integer id) throws EmployeeNotFound;
 
     public void saveEmployee(Employee employee);
 
